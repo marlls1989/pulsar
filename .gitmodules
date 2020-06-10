@@ -1,0 +1,3 @@
+[submodule "drexpander"]
+	path = haskell/drexpander
+	url = ../drexpander.git
