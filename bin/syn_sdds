@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+SCRIPTS_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+unset SOURCE
+
+export PULSAR_HOME=$(readlink -f ${SCRIPT_DIR}/..)
+export PATH=${PULSAR_HOME}/bin:${PULSAR}
+export LC_ALL=C
+export TECH=$1
+export DESIGN=$2
+export PERIOD=$(printf "%0.2f" $3)
+
+set -e
+
+genus -batch -no_gui -f ${PULSAR_HOME}/scripts/syn_sdds.tcl
+
+exit 0
