@@ -1,0 +1,18 @@
+#####################################################################
+#
+# Innovus mode file
+# Created by Genus(TM) Synthesis Solution on 06/10/2020 19:10:52
+#
+#####################################################################
+
+
+# General Mode Settings
+###########################################################
+
+set_db timing_apply_default_primary_input_assertion false
+set_db timing_clock_phase_propagation both
+set_db timing_analysis_async_checks no_async
+set_db extract_rc_layer_independent 1
+set_db design_process_node 45
+set_db place_global_reorder_scan false
+set_db extract_rc_engine pre_route

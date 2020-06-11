@@ -1,0 +1,945 @@
+library (PULSAR_NAND2) {
+  delay_model : table_lookup;
+
+
+  /* unit attributes */
+  time_unit : "1ns";
+  voltage_unit : "1V";
+  current_unit : "1mA";
+  pulling_resistance_unit : "1kohm";
+  leakage_power_unit : "1pW";
+  capacitive_load_unit (1.0,pf);
+
+  /* operation conditions */
+  nom_process     : 1;
+  nom_temperature : 25;
+  nom_voltage     : 1.2;
+  operating_conditions(typical) {
+    process	: 1;
+    temperature	: 25;
+    voltage	: 1.2;
+    tree_type	: balanced_tree
+  }
+  default_operating_conditions : typical;
+
+    /* threshold definitions */
+  slew_lower_threshold_pct_fall : 30.0;
+  slew_upper_threshold_pct_fall : 70.0;
+  slew_lower_threshold_pct_rise : 30.0;
+  slew_upper_threshold_pct_rise : 70.0;
+  input_threshold_pct_fall      : 50.0;
+  input_threshold_pct_rise      : 50.0;
+  output_threshold_pct_fall     : 50.0;
+  output_threshold_pct_rise     : 50.0;
+  slew_derate_from_library      : 0.5;
+
+  /* default attributes */
+  default_leakage_power_density	: 0.0;
+  default_cell_leakage_power	: 0.0;
+  default_fanout_load	: 1.0;
+  default_output_pin_cap	: 0.0;
+  default_inout_pin_cap	: 0.00158;
+  default_input_pin_cap	: 0.00158;
+  default_max_transition	: 1.02;
+
+
+cell (nor2) {
+  area : 31.0;
+  pin(a) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(b) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "!(a|b)";
+    timing() {
+      related_pin : "a";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.02");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "b";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.02");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (nand2) {
+  area : 31.0;
+  pin(a) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(b) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "!(a*b)";
+    timing() {
+      related_pin : "a";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.02");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "b";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.02");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+// cell (mux2) {
+//   area : 38.0;
+//   pin(a) {
+//     direction : input;
+//     capacitance : 0.002;
+//   }
+//   pin(b) {
+//     direction : input;
+//     capacitance : 0.002;
+//   }
+//   pin(sel) {
+//     direction : input;
+//     capacitance : 0.002;
+//   }
+//   pin(y) {
+//     direction : output;
+//     capacitance : 0.0;
+//     function : "a*sel + b*!sel";
+//     timing() {
+//       related_pin : "a";
+//       timing_sense : positive_unate;
+//       cell_rise(scalar) {
+//       values ("0.015");
+//       }
+//       rise_transition(scalar) {
+//       values ("0.0");
+//       }
+//       cell_fall(scalar) {
+//       values ("0.015");
+//       }
+//       fall_transition(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//     timing() {
+//       related_pin : "b";
+//       timing_sense : positive_unate;
+//       cell_rise(scalar) {
+//       values ("0.015");
+//       }
+//       rise_transition(scalar) {
+//       values ("0.0");
+//       }
+//       cell_fall(scalar) {
+//       values ("0.015");
+//       }
+//       fall_transition(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//     timing() {
+//       related_pin : "sel";
+//       timing_sense : positive_unate;
+//       cell_rise(scalar) {
+//       values ("0.015");
+//       }
+//       rise_transition(scalar) {
+//       values ("0.0");
+//       }
+//       cell_fall(scalar) {
+//       values ("0.015");
+//       }
+//       fall_transition(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//     timing() {
+//       related_pin : "sel";
+//       timing_sense : negative_unate;
+//       cell_rise(scalar) {
+//       values ("0.015");
+//       }
+//       rise_transition(scalar) {
+//       values ("0.0");
+//       }
+//       cell_fall(scalar) {
+//       values ("0.015");
+//       }
+//       fall_transition(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//   }
+// }
+
+cell (inv) { 
+  area : 1.0;
+  pin(a) {
+    direction : input;
+    capacitance : 0.001;
+  }
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "!a";
+    timing() {
+      related_pin : "a";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.0");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.0");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (buff) { 
+  area : 1.0;
+  pin(a) {
+    direction : input;
+    capacitance : 0.001;
+  }
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "a";
+    timing() {
+      related_pin : "a";
+      timing_sense : positive_unate;
+      cell_rise(scalar) {
+      values ("0.0");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.0");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (xor2) { 
+  area : 38.0;
+  pin(a) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(b) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "a^b";
+    timing() {
+      related_pin : "a";
+      timing_sense : positive_unate;
+      cell_rise(scalar) {
+      values ("0.015");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.015");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "b";
+      timing_sense : positive_unate;
+      cell_rise(scalar) {
+      values ("0.015");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.015");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "a";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.015");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.015");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "b";
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.015");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.015");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (dff) { 
+  area : 32.0;
+  pin(d) {
+    direction : input;
+    capacitance : 0.001;
+    timing() {
+      related_pin : "ck";
+      timing_type : setup_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "ck";
+      timing_type : hold_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+  pin(ck) {
+    direction : input;
+    clock : true;
+    capacitance : 0.001;
+  }
+  ff(IQ,IQN) {
+    clocked_on : "ck";
+    next_state : "d";
+  }
+  pin(q) {
+    direction : output;
+    capacitance : 0.0;
+    function : "IQ";
+    timing() {
+      related_pin : "ck";
+      timing_type : rising_edge;
+      timing_sense : non_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (dffr) { 
+  area : 64.0;
+  pin(d) {
+    direction : input;
+    capacitance : 0.001;
+    timing() {
+      related_pin : "ck";
+      timing_type : setup_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "ck";
+      timing_type : hold_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+  pin(ck) {
+    direction : input;
+    clock : true;
+    capacitance : 0.001;
+  }
+  pin(rb) {
+    direction : input;
+    capacitance : 0.001;
+    timing() {
+      related_pin : "ck";
+      timing_type : setup_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "ck";
+      timing_type : hold_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+  ff(IQ,IQN) {
+    clocked_on : "ck";
+    next_state : "d";
+    clear  : "(!rb)";
+  }
+  pin(q) {
+    direction : output;
+    capacitance : 0.0;
+    function : "IQ";
+    timing() {
+      related_pin : "ck";
+      timing_type : rising_edge;
+      timing_sense : non_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "rb";
+      timing_type : clear;
+      timing_sense : positive_unate;
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (dffs) { 
+  area : 64.0;
+  pin(d) {
+    direction : input;
+    capacitance : 0.001;
+    timing() {
+      related_pin : "ck";
+      timing_type : setup_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "ck";
+      timing_type : hold_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+  pin(ck) {
+    direction : input;
+    clock : true;
+    capacitance : 0.001;
+  }
+  pin(sb) {
+    direction : input;
+    capacitance : 0.001;
+    timing() {
+      related_pin : "ck";
+      timing_type : setup_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "ck";
+      timing_type : hold_rising;
+      rise_constraint(scalar) {
+      values ("0.0");
+      }
+      fall_constraint(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+  ff(IQ,IQN) {
+    clocked_on : "ck";
+    next_state : "d";
+    preset  : "(!sb)";
+  }
+  pin(q) {
+    direction : output;
+    capacitance : 0.0;
+    function : "IQ";
+    timing() {
+      related_pin : "ck";
+      timing_type : rising_edge;
+      timing_sense : non_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "sb";
+      timing_type : preset;
+      timing_sense : negative_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (zbuf) { 
+  area : 1.0;
+  pin(a) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(en) {
+    direction : input;
+    capacitance : 0.002;
+  }
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "a";
+    three_state : "!en";
+    timing() {
+      related_pin : "a";
+      timing_sense : positive_unate;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "en";
+      timing_sense : positive_unate
+      timing_type : three_state_enable;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+    timing() {
+      related_pin : "en";
+      timing_sense : negative_unate
+      timing_type : three_state_disable;
+      cell_rise(scalar) {
+      values ("0.01");
+      }
+      rise_transition(scalar) {
+      values ("0.0");
+      }
+      cell_fall(scalar) {
+      values ("0.01");
+      }
+      fall_transition(scalar) {
+      values ("0.0");
+      }
+    }
+  }
+}
+
+cell (tielo) { 
+  area : 1.0;
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "0";
+  }
+}
+
+cell (tiehi) { 
+  area : 1.0;
+  pin(y) {
+    direction : output;
+    capacitance : 0.0;
+    function : "1";
+  }
+}
+
+//cell (dffenr) {
+//   area : 96.0;
+//   pin(d) {
+//     direction : input;
+//     capacitance : 0.001;
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : setup_rising;
+//       rise_constraint(scalar) {
+//       values ("0.01");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.01");
+//       }
+//     }
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : hold_rising;
+//       rise_constraint(scalar) {
+//       values ("0.0");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//   }
+//   pin(rb) {
+//    direction : input;
+//    capacitance : 0.001;
+//    timing() {
+//      related_pin : "ck";
+//      timing_type : setup_rising;
+//      rise_constraint(scalar) {
+//      values ("0.0");
+//      }
+//      fall_constraint(scalar) {
+//      values ("0.0");
+//      }
+//    }
+//    timing() {
+//      related_pin : "ck";
+//      timing_type : hold_rising;
+//      rise_constraint(scalar) {
+//      values ("0.0");
+//      }
+//      fall_constraint(scalar) {
+//      values ("0.0");
+//      }
+//    }
+//   }
+//   pin(en) {
+//     direction : input;
+//     capacitance : 0.001;
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : setup_rising;
+//       rise_constraint(scalar) {
+//       values ("0.01");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.01");
+//       }
+//     }
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : hold_rising;
+//       rise_constraint(scalar) {
+//       values ("0.0");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//   }
+//   pin(ck) {
+//     direction : input;
+//     clock : true;
+//     capacitance : 0.001;
+//   }
+//   ff(IQ,IQN) {
+//     clocked_on : "ck";
+//     next_state : "(d*en) + (IQ*!en)";
+//     clear  : "(!rb)";
+//   }
+//   pin(q) {
+//     direction : output;
+//     capacitance : 0.0;
+//     function : "IQ";
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : rising_edge;
+//       timing_sense : non_unate;
+//       cell_rise(scalar) {
+//       values ("0.01");
+//       }
+//       rise_transition(scalar) {
+//       values ("0.0");
+//       }
+//       cell_fall(scalar) {
+//       values ("0.01");
+//       }
+//       fall_transition(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//     timing() {
+//      related_pin : "rb";
+//      timing_type : clear;
+//      timing_sense : positive_unate;
+//      cell_fall(scalar) {
+//      values ("0.01");
+//      }
+//      fall_transition(scalar) {
+//      values ("0.0");
+//      }
+//     }
+//   }
+// }
+// cell (dffens) {
+//   area : 96.0;
+//   pin(d) {
+//     direction : input;
+//     capacitance : 0.001;
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : setup_rising;
+//       rise_constraint(scalar) {
+//       values ("0.01");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.01");
+//       }
+//     }
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : hold_rising;
+//       rise_constraint(scalar) {
+//       values ("0.0");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//   }
+//   pin(sb) {
+//    direction : input;
+//    capacitance : 0.001;
+//    timing() {
+//      related_pin : "ck";
+//      timing_type : setup_rising;
+//      rise_constraint(scalar) {
+//      values ("0.0");
+//      }
+//      fall_constraint(scalar) {
+//      values ("0.0");
+//      }
+//    }
+//    timing() {
+//      related_pin : "ck";
+//      timing_type : hold_rising;
+//      rise_constraint(scalar) {
+//      values ("0.0");
+//      }
+//      fall_constraint(scalar) {
+//      values ("0.0");
+//      }
+//    }
+//   }
+//   pin(en) {
+//     direction : input;
+//     capacitance : 0.001;
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : setup_rising;
+//       rise_constraint(scalar) {
+//       values ("0.01");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.01");
+//       }
+//     }
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : hold_rising;
+//       rise_constraint(scalar) {
+//       values ("0.0");
+//       }
+//       fall_constraint(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//   }
+//   pin(ck) {
+//     direction : input;
+//     clock : true;
+//     capacitance : 0.001;
+//   }
+//   ff(IQ,IQN) {
+//     clocked_on : "ck";
+//     next_state : "(d*en) + (IQ*!en)";
+//     preset  : "(!sb)";
+//   }
+//   pin(q) {
+//     direction : output;
+//     capacitance : 0.0;
+//     function : "IQ";
+//     timing() {
+//       related_pin : "ck";
+//       timing_type : rising_edge;
+//       timing_sense : non_unate;
+//       cell_rise(scalar) {
+//       values ("0.01");
+//       }
+//       rise_transition(scalar) {
+//       values ("0.0");
+//       }
+//       cell_fall(scalar) {
+//       values ("0.01");
+//       }
+//       fall_transition(scalar) {
+//       values ("0.0");
+//       }
+//     }
+//     timing() {
+//      related_pin : "sb";
+//      timing_type : preset;
+//      timing_sense : negative_unate;
+//      cell_rise(scalar) {
+//      values ("0.01");
+//      }
+//      rise_transition(scalar) {
+//      values ("0.0");
+//      }
+//     }
+//   }
+// }
+}

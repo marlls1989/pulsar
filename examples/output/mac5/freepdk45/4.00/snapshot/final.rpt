@@ -1,0 +1,51 @@
+
+
+Working Directory = ../examples
+QoS Summary for mac5
+================================================================================
+Metric                          logical        
+================================================================================
+Slack (ps):                         0
+  R2R (ps):                         0
+  I2R (ps):                         0
+  R2O (ps):                        64
+  I2O (ps):                  no_value
+  CG  (ps):                  no_value
+TNS (ps):                           0
+  R2R (ps):                         0
+  I2R (ps):                         0
+  R2O (ps):                         0
+  I2O (ps):                  no_value
+  CG  (ps):                  no_value
+Failing Paths:                      0
+Cell Area:                     14,351
+Total Cell Area:               14,351
+Leaf Instances:                 6,136
+Total Instances:                6,136
+Utilization (%):                 0.00
+Tot. Net Length (um):        no_value
+Avg. Net Length (um):        no_value
+Route Overflow H (%):        no_value
+Route Overflow V (%):        no_value
+MBCI(%) (bits/gate) :            0.00
+Norm Cong Hotspot Area:
+  Max Cong:                  no_value
+  Tot Cong:                  no_value
+================================================================================
+CPU  Runtime (h:m:s):        00:02:37
+Real Runtime (h:m:s):        00:02:23
+CPU  Elapsed (h:m:s):        00:02:39
+Real Elapsed (h:m:s):        00:02:24
+Memory (MB):                   739.51
+================================================================================
+================================================================================
+Flow Settings:
+================================================================================
+Total Runtime (h:m:s): 00:02:24
+Total Memory (MB):     739.51
+Executable Version:    18.14-s037_1
+================================================================================
+Total Cell Area =  Cell Area + Physical Cell Area
+Total Instances =  Leaf Instances + Physical Instances
+
+
