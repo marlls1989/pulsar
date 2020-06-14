@@ -14,12 +14,18 @@ git clone https://github.com/marlls1989/pulsar.git
 cd pulsar
 export PATH=$(pwd)/bin:$PATH
 ```
+An overview of the Pulsar flow is depicted in Figure 1.
+
+<figure class="image">
+  <figcaption>Figure 1. Pulsar flow overview.</figcaption>
+  <img src="./doc/drflow.svg" alt="Pulsar flow overview"/>
+</figure>
 
 This repository is organised in the following structure:
 - /bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.
 - /examples : contains a tutorial demonstraining the use of pulsar to synthesise a fully function multiplier-accumulate unit.
-- /haskell : references to the repository containing the haskell source code for the hbcnConstrainer and drexpension tools
-- /scripts : contains the genus TCL scripts
+- /haskell : references to the repository containing the haskell source code for the hbcnConstrainer and drexpension tools.
+- /scripts : contains the genus TCL scripts.
 - /tech : contains the target technology dependent files and the virtual-netlist library of components.
 
 ## REFERENCES
