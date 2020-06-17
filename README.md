@@ -1,10 +1,10 @@
 # Pulsar
 
-This repository contains the public release of Pulsar, the timing constrained asynchronous circuits synthesis framework.
-Pulsar is developed as part of my master's and on-going doctoral theses, it is documented in references [1-3].
-At this stage, Pulsar is able to synthesise SDDS-NCL circuits. The SDDS-NCL asynchronous template is documented in references [4-5].
+This repository contains the public release of Pulsar, a framework enable the design and synthesis of timing-constrained asynchronous circuit.
+Pulsar is developed as part of my master's and on-going doctoral theses. It is documented in references [1-3].
+Currently, Pulsar is able to synthesise SDDS-NCL circuits. The SDDS-NCL asynchronous template is documented in references [4-5].
 
-Pulsar relies on Cadence Genus 18.1 or superior to perform logical synthesis and optimisation.
+Pulsar relies on Cadence Genus version 18.1 or later to perform logical synthesis and optimisation.
 This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
 The user is expected to provide a valid instalation of Genus to use Pulsar.
 
@@ -15,17 +15,17 @@ cd pulsar
 export PATH=$(pwd)/bin:$PATH
 ```
 
-This repository is organised in the following structure:
+This repository is organised in four folders, as follows:
 - /bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.
-- /examples : contains a tutorial demonstraining the use of pulsar to synthesise a fully function multiplier-accumulate unit.
-- /haskell : references to the repository containing the haskell source code for the hbcnConstrainer and drexpension tools
-- /scripts : contains the genus TCL scripts
-- /tech : contains the target technology dependent files and the virtual-netlist library of components.
+- /examples : contains a tutorial demonstrating the use of Pulsar to synthesise a fully functional multiply-accumulate unit. It employs the ASCEnD-FreePDK45 SDDS-NCL cell library available at https://github.com/marlls1989/ascend-freepdk45.
+- /haskell : references to the repository containing the Haskell source code for the hbcnConstrainer and drexpansion tools.
+- /scripts : contains the genus TCL scripts.
+- /tech : contains the target technology-dependent files and the virtual-netlist library of components.
 
 ## REFERENCES
 [1] - SARTORI, M. L. L.; MOREIRA, M. T.; CALAZANS, N. L. V. A Frontend using Traditional EDA Tools for the Pulsar QDI Design Flow. In: 26th IEEE International Symposium on Asynchronous Circuits and Systems (ASYNC'20), 2020. To be presented.
 
-[2] - SARTORI, M. L. L.. PULSAR: Towards a Synthesis flow for QDI Circuits. MSc Dissertation, PPGCC-FACIN-PUCRS, Porto Alegre, Brazil. August 2019. (Research Advisor: Ney Laert Vilar Calazans)
+[2] - SARTORI, M. L. L. PULSAR: Towards a Synthesis flow for QDI Circuits. MSc Dissertation, PPGCC-FACIN-PUCRS, Porto Alegre, Brazil. August 2019. (Research Advisor: Ney Laert Vilar Calazans)
 
 [3] - SARTORI, M. L. L.; WUERDIG, R. N.; MOREIRA, M. T.; CALAZANS, N. L. V. Pulsar: Constraining QDI Circuits Cycle Time Using Traditional EDA Tools. In: 25th IEEE International Symposium on Asynchronous Circuits and Systems (ASYNC'19), Hirosaki, 2019. pp. 114-123. (Best Paper Award Nominee)
 
