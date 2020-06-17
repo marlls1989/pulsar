@@ -18,25 +18,37 @@ An overview of the Pulsar flow is depicted in Figure 1.
 It comprises a front-end and a back-end.
 The front-end is designed to be technology and template agnostic.
 It produces a virtual-netlist and a structural graph from a high-level description of the circuit in Verilog.
-The virtual-netlist and the structural graph are then processed by the template-dependent back-end in order implement the circuit in the target technology.
+The front-end performs logical optimisation and maps the circuit to a abstract logic components with known dual-rail expansion.
+It also performs retiming, distributing the elements between pipeline stages to reduce logic complexity prior to expansion.
+The structural graph captures the data flow between register components and ports, this is later used for timing analysis.
+This process is better covered in references [1] and [2].
+
+The resulting Virtual-netlist and the structural graph are then processed by the template-dependent back-end in order implement the circuit in the target technology.
 Currently, the only back-end available in the Pulsar Flow targets the Pseudo-Synchronous SDDS-NCL template.
-This back-end comprises the HBCN constrainer and the Sequential SDDS-NCL Synthesis Flow.
-The HBCN constrainer computes the 
+This back-end comprises the HBCN Constrainer and the Sequential SDDS-NCL Synthesis Flow.
+The HBCN Constrainer computes the HBCN from Structural Graph and derives the design constrains used during the synthesis to constrain the cycle time.
+The computation of these constraints are covered in references [2] and [3].
 
 <figure class="image">
-  <figcaption>Figure 1. Pulsar flow overview.</figcaption>
+  <figcaption>Figure 1. Pulsar flow overview, green components are part of the frontend and red components are part of the backend.</figcaption>
   <img src="./doc/drflow.svg" alt="Pulsar flow overview."/>
 </figure>
 
-
-At its core is the Sequential SDDS-NCL synthesis flow, depicted in Figure 2.
+The Sequential SDDS-NCL Synthesis Flow, depicted in Figure 2, is at the core of the back-end.
+It reads the Virtual-Netlist and the Virtual Function Dual-Rail expansion of each component.
+This design is flattened, optimised and mapped to NCL and NCLP gates of the target technology.
+The Design Constraints build by the HBCN Constrainer steers this synthesis effort, constraining the cycle-time.
+The initial mapping of the design does not take into consideration the proper use of NCL and NCLP in regard to protocol, thus may present incorrect behaviour.
+This initial mapping is called the X-Netlist and it is correct using the Fix X-Netlist algorithm.
+After the correction, timing issues may have arisen, these are fixed by iterating optimisation steps in turns on NCL and NCLP gates.
+For more information on SDDS-NCL and the Fix X-Netlist algorithm see references [4] and [5], for the Sequential SDDS-NCL see references [2] and [3].
 
 <figure class="image">
   <figcaption>Figure 2. Sequential SDDS-NCL Synthesis.</figcaption>
   <img src="./doc/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
 </figure>
 
-This repository is organised in the following structure:
+This repository is organised in the following structure, each subfolder contains a README further detailing their content:
 - /bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.
 - /examples : contains a tutorial demonstraining the use of pulsar to synthesise a fully function multiplier-accumulate unit.
 - /haskell : references the repository containing the haskell source code for the hbcnConstrainer and drexpension tools.
