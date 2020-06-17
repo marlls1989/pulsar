@@ -14,6 +14,8 @@ git clone https://github.com/marlls1989/pulsar.git
 cd pulsar
 export PATH=$(pwd)/bin:$PATH
 ```
+## The Pulsar Synthesis Flow
+
 An overview of the Pulsar flow is depicted in Figure 1.
 It comprises a front-end and a back-end.
 The front-end is designed to be technology and template agnostic.
@@ -47,6 +49,8 @@ For more information on SDDS-NCL and the Fix X-Netlist algorithm see references 
   <figcaption>Figure 2. Sequential SDDS-NCL Synthesis.</figcaption>
   <img src="./doc/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
 </figure>
+
+## Repository Structure
 
 This repository is organised in the following structure, each subfolder contains a README further detailing their content:
 - /bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.
