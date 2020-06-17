@@ -1,10 +1,10 @@
 # Pulsar
 
-This repository contains the public release of Pulsar, a framework enable the design and synthesis of timing-constrained asynchronous circuit.
-Pulsar is developed as part of my master's and on-going doctoral theses. It is documented in references [1-3].
-Currently, Pulsar is able to synthesise SDDS-NCL circuits. The SDDS-NCL asynchronous template is documented in references [4-5].
+This repository contains the public release of Pulsar, a framework that enables the design and synthesis of timing-constrained asynchronous circuits.
+Pulsar is developed as part of my Master's and on-going PhD theses. Its approach is partially documented in references [1-3].
+Currently, Pulsar is able to synthesise SDDS-NCL circuits. The SDDS-NCL asynchronous template is partially described in references [4-5].
 
-Pulsar relies on Cadence Genus version 18.1 or later to perform logical synthesis and optimisation.
+Pulsar relies on the Cadence Genus synthesis tool, version 18.1 or later, to perform logical synthesis and optimisation.
 This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
 The user is expected to provide a valid instalation of Genus to use Pulsar.
 
@@ -17,7 +17,7 @@ export PATH=$(pwd)/bin:$PATH
 
 This repository is organised in four folders, as follows:
 - /bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.
-- /examples : contains a tutorial demonstrating the use of Pulsar to synthesise a fully functional multiply-accumulate unit. It employs the ASCEnD-FreePDK45 SDDS-NCL cell library available at https://github.com/marlls1989/ascend-freepdk45.
+- /examples : contains a tutorial demonstrating the use of Pulsar to synthesise a fully functional multiply-accumulate (MAC) unit. It employs the ASCEnD-FreePDK45 SDDS-NCL cell library available at https://github.com/marlls1989/ascend-freepdk45. The MAC example is the basis for a Pulsar tutorial to be released soon in this project.
 - /haskell : references to the repository containing the Haskell source code for the hbcnConstrainer and drexpansion tools.
 - /scripts : contains the genus TCL scripts.
 - /tech : contains the target technology-dependent files and the virtual-netlist library of components.
