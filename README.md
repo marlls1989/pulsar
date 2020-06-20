@@ -8,6 +8,9 @@ Pulsar relies on Cadence Genus 18.1 or superior to perform logical synthesis and
 This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
 The user is expected to provide a valid instalation of Genus to use Pulsar.
 
+This distribution includes a copy of ASCEnD-FreePDK45.
+More information regarding this library may be found at its [own repository](https://github.com/marlls1989/ascend-freepdk45).
+
 To use this software, clone this repo and append the bin folder to your PATH:
 ```bash
 git clone https://github.com/marlls1989/pulsar.git
