@@ -8,8 +8,15 @@ Pulsar relies on Cadence Genus 18.1 or superior to perform logical synthesis and
 This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
 The user is expected to provide a valid instalation of Genus to use Pulsar.
 
-This distribution includes a copy of ASCEnD-FreePDK45.
-More information regarding this library may be found at its [own repository](https://github.com/marlls1989/ascend-freepdk45).
+
+The Pulsar flow supports multiple target technologies.
+Each process requires its own individual cell library.
+Internaly at GAPH libraries for TSMC180 and ST65 processes exist.
+Pulsar and the TSMC180 Library have been used on a design taped-out to Europractice's Mini@sic MPW run.
+However these libraries are covered by NDA with the foundry and cannot be distribuited on the internet.
+Instead, this distribution includes a copy of ASCEnD-FreePDK45, a free and opensource predictive PDK.
+More information on this library may be found at its [own repository](https://github.com/marlls1989/ascend-freepdk45).
+
 
 To use this software, clone this repo and append the bin folder to your PATH:
 ```bash
