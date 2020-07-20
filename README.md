@@ -1,22 +1,24 @@
 # Pulsar
 
-This repository contains the public release of Pulsar, the timing constrained asynchronous circuits synthesis framework.
-Pulsar is developed as part of my master's and on-going doctoral theses, it is documented in references [1-3].
-At this stage, Pulsar is able to synthesise SDDS-NCL circuits. The SDDS-NCL asynchronous template is documented in references [4-5].
+This repository contains the public release of Pulsar, a timing-constrainable asynchronous circuit synthesis framework.
+Pulsar is under development. 
+It was part of my MSc thesis work and is now part of my ongoing PhD thesis. 
+It is partially documented in references [1-3].
+At the time of this writing, Pulsar is able to synthesise SDDS-NCL circuits.
+The SDDS-NCL logic template that cupports the design of quasi-delay insensitive (QDI) circuits is documented in references [4-5].
 
-Pulsar relies on Cadence Genus 18.1 or superior to perform logical synthesis and optimisation.
+Pulsar relies on Cadence Genus 18.1 or later versions to perform logic synthesis and optimisation.
 This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
-The user is expected to provide a valid instalation of Genus to use Pulsar.
+The user is expected to have available a valid instalation of Genus to use Pulsar.
 
-
-The Pulsar flow supports multiple target technologies.
-Each process requires its own individual cell library.
-Internaly at GAPH libraries for TSMC180 and ST65 processes exist.
-Pulsar and the TSMC180 Library have been used on a design taped-out to Europractice's Mini@sic MPW run.
-However these libraries are covered by NDA with the foundry and cannot be distribuited on the internet.
-Instead, this distribution includes a copy of ASCEnD-FreePDK45, a free and opensource predictive PDK.
+The Pulsar flow already supports multiple technology nodes.
+Running Pulsar requires a specific cell library and some specific cell models, to generate what are called virtual netlists, a required step to adapt asynchronous design flows to employ commercial design tools.
+Internaly, at the GAPH research group, libraries and models for the TSMC 180nm and STMicroelectronics 65nm bulk CMOS commercial processes already exist.
+These libraries and models are respectively named ASCEnD-TSMC180 and ASCEnD-ST65.
+Pulsar and the ASCEnD-TSMC180 library and models have been used on a design taped-out to Europractice's Mini@sic MPW run in May 2020.
+Because these libraries are covered by NDAs with the respectives foundries, they cannot be freely distribuited.
+Instead, this distribution includes a copy of ASCEnD-FreePDK45, a library and set of models developed based on the free, open source predictive FreePDK45.
 More information on this library may be found at its [own repository](https://github.com/marlls1989/ascend-freepdk45).
-
 
 To use this software, clone this repo and append the bin folder to your PATH:
 ```bash
