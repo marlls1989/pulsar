@@ -7,7 +7,7 @@ It is partially documented in references [1-3].
 At the time of this writing, Pulsar is able to synthesise SDDS-NCL circuits.
 The SDDS-NCL logic template that cupports the design of quasi-delay insensitive (QDI) circuits is documented in references [4-5].
 
-Pulsar relies on Cadence Genus 18.1 or later versions to perform logic synthesis and optimisation.
+Pulsar relies on Cadence Genus 18.1 or later versions of this tool to perform logic synthesis and optimisation.
 This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
 The user is expected to have available a valid instalation of Genus to use Pulsar.
 
