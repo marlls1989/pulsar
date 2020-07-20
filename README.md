@@ -60,7 +60,7 @@ This is usually an automatic procedure.
 For more information on SDDS-NCL and the Fix X-Netlist algorithm see references [4] and [5]. For the Sequential SDDS-NCL see references [2] and [3].
 
 <figure class="image">
-  <figcaption>Figure 2. Sequential SDDS-NCL Synthesis.</figcaption>
+  <figcaption>Figure 2. The Sequential SDDS-NCL Synthesis Flow.</figcaption>
   <img src="./doc/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
 </figure>
 
@@ -68,8 +68,8 @@ For more information on SDDS-NCL and the Fix X-Netlist algorithm see references 
 
 This repository is organised in the following structure, each subfolder contains a README further detailing their respective contents:
 - /bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.
-- /examples : contains a tutorial demonstraining the use of pulsar to synthesise a fully function multiplier-accumulate unit.
-- /haskell : references the repository containing the haskell source code for the hbcnConstrainer and drexpension tools.
+- /examples : contains a tutorial demonstraining the use of pulsar to synthesise a fully functional multiply accumulate (MAC) pipeline module.
+- /haskell : repository containing the haskell source code for the hbcnConstrainer and drexpension tools.
 - /scripts : contains the genus TCL scripts.
 - /tech : contains the target technology dependent files and the virtual-netlist library of components.
 
