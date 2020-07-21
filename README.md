@@ -12,7 +12,7 @@ This enables taking advantage of state of the art industrial synthesis tools to 
 The user is expected to have available a valid instalation of Genus to use Pulsar.
 
 The Pulsar flow already supports multiple technology nodes.
-Running Pulsar requires a specific cell library and some specific cell models, to generate what are called virtual netlists, a required step to adapt asynchronous design flows to employ commercial design tools.
+Running Pulsar requires a specific cell library and some specific cell models, a required step to adapt asynchronous design flows to employ commercial design tools.
 Internaly, at the GAPH research group, libraries and models for the TSMC 180nm and STMicroelectronics 65nm bulk CMOS commercial processes already exist.
 These libraries and models are respectively named ASCEnD-TSMC180 and ASCEnD-ST65.
 Pulsar and the ASCEnD-TSMC180 library and models have been used on a design taped-out to Europractice's Mini@sic MPW run in May 2020.
