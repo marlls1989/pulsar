@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pulsar by marlls1989</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Pulsar</h1>
+      <h2 class="project-tagline">Pulsar asynchronous synthesis framework</h2>
+      <a href="https://github.com/marlls1989/pulsar" class="btn">View on GitHub</a>
+      <a href="https://github.com/marlls1989/pulsar/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/marlls1989/pulsar/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="pulsar---a-flow-to-support-the-design-of-qdi-asynchronous-circuits" class="anchor" href="#pulsar---a-flow-to-support-the-design-of-qdi-asynchronous-circuits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pulsar - A Flow to Support the Design of QDI asynchronous Circuits</h1>
+<p>This repository contains the public release of Pulsar, a timing-constrainable asynchronous circuit synthesis framework.
+Pulsar is under development.
+It was part of my MSc thesis work and is now part of my ongoing PhD thesis.
+It is partially documented in references [1-3].
+At the time of this writing, Pulsar is able to synthesise SDDS-NCL circuits.
+The SDDS-NCL logic template that cupports the design of quasi-delay insensitive (QDI) circuits is documented in references [4-5].</p>
+<p>Pulsar relies on Cadence Genus 18.1 or later versions of this tool to perform logic synthesis and optimisation.
+This enables taking advantage of state of the art industrial synthesis tools to perform technology mapping.
+The user is expected to have available a valid instalation of Genus to use Pulsar.</p>
+<p>The Pulsar flow already supports multiple technology nodes.
+Running Pulsar requires a specific cell library and some specific cell models, to generate what are called virtual netlists, a required step to adapt asynchronous design flows to employ commercial design tools.
+Internaly, at the GAPH research group, libraries and models for the TSMC 180nm and STMicroelectronics 65nm bulk CMOS commercial processes already exist.
+These libraries and models are respectively named ASCEnD-TSMC180 and ASCEnD-ST65.
+Pulsar and the ASCEnD-TSMC180 library and models have been used on a design taped-out to Europractice's Mini@sic MPW run in May 2020.
+Because these libraries are covered by NDAs with the respectives foundries, they cannot be freely distribuited.
+Instead, this distribution includes a copy of ASCEnD-FreePDK45, a library and set of models developed based on the free, open source predictive FreePDK45.
+More information on this library may be found at its <a href="https://github.com/marlls1989/ascend-freepdk45">own repository</a>.</p>
+<p>To use this software, clone this repo and append the bin folder to your PATH:</p>
+<div class="highlight highlight-source-shell"><pre>git clone https://github.com/marlls1989/pulsar.git
+<span class="pl-c1">cd</span> pulsar
+<span class="pl-k">export</span> PATH=<span class="pl-s"><span class="pl-pds">$(</span>pwd<span class="pl-pds">)</span></span>/bin:<span class="pl-smi">$PATH</span></pre></div>
+<h2>
+<a id="the-pulsar-synthesis-flow" class="anchor" href="#the-pulsar-synthesis-flow" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Pulsar Synthesis Flow</h2>
+<p>An overview of the Pulsar flow is depicted in Figure 1.
+It comprises a front-end and a back-end.
+The front-end is designed to be technology and template agnostic.
+It produces a Virtual Netlist and a structural Circuit Graph from a high-level RTL description of the circuit in Verilog.
+The front-end performs logical optimisation and maps the circuit to a abstract logic components with known dual-rail expansion.
+It can also perform retiming, distributing components among pipeline stages to reduce logic complexity prior to a logic, dual-rail expansion.
+The Circuit Graph captures the data flow between register components and ports, which is later used for timing analysis.
+This process is better covered in references [1] and [2].</p>
+<p>The resulting Virtual Netlist and the structural Circuit Graph are then processed by the template-dependent back-end to implement the circuit in the target technology.
+Currently, the only back-end available with the Pulsar Flow targets the Pseudo-Synchronous SDDS-NCL template.
+This back-end comprises the Half Buffer Channel Network (HBCN) Constrainer and the Sequential SDDS-NCL Synthesis Flow.
+The HBCN Constrainer computes the HBCN model from the structural Circuit Graph and derives the design constrains to use during synthesis to constrain the cycle time.
+The computation of these constraints are covered in references [2] and [3].</p>
+
+  Figure 1. Pulsar flow overview, green components are part of the flow front-end and red components are part of the flow back-end.
+  <img src="./docs/drflow.svg" alt="Pulsar flow overview.">
+
+<p>The Sequential SDDS-NCL Synthesis Flow, depicted in Figure 2, is at the core of the Pulsar back-end.
+It reads the Virtual Netlist and the Virtual Function Dual-Rail Expansions of components, a library of models.
+This design is then flattened, optimised and mapped to NCL and NCLP gates in the target technology.
+The Design Constraints built by the HBCN Constrainer steers this synthesis effort, constraining the cycle time.
+The initial design mapping does not take into consideration the proper use of NCL and NCLP gates as mandated by the SDDS-NCL template.
+It can thus generate circuits with incorrect functionality.
+The initial mapping is accordingly called X-Netlist and it is corrected using the Fix X-Netlist algorithm.
+After correction, timing faults may have arisen, which are then fixed by iterating optimisation steps in turn on NCL and NCLP gates.
+This is usually an automatic procedure.
+For more information on SDDS-NCL and the Fix X-Netlist algorithm see references [4] and [5]. For the Sequential SDDS-NCL see references [2] and [3].</p>
+
+  Figure 2. The Sequential SDDS-NCL Synthesis Flow.
+  <img src="./docs/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis.">
+
+<h2>
+<a id="repository-structure" class="anchor" href="#repository-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Repository Structure</h2>
+<p>This repository is organised in the following structure, each subfolder contains a README further detailing their respective contents:</p>
+<ul>
+<li>/bin : contains the precompiled drexpansion and hbcnConstrainer binaries and the scripts used to invoke genus.</li>
+<li>/examples : contains a tutorial demonstraining the use of pulsar to synthesise a fully functional multiply accumulate (MAC) pipeline module.</li>
+<li>/haskell : repository containing the haskell source code for the hbcnConstrainer and drexpension tools.</li>
+<li>/scripts : contains the genus TCL scripts.</li>
+<li>/tech : contains the target technology dependent files and the virtual-netlist library of components.</li>
+</ul>
+<h2>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>REFERENCES</h2>
+<p>[1] - SARTORI, M. L. L.; MOREIRA, M. T.; CALAZANS, N. L. V. A Frontend using Traditional EDA Tools for the Pulsar QDI Design Flow. In: 26th IEEE International Symposium on Asynchronous Circuits and Systems (ASYNC'20), 2020. To be presented.</p>
+<p>[2] - SARTORI, M. L. L.. PULSAR: Towards a Synthesis flow for QDI Circuits. MSc Dissertation, PPGCC-FACIN-PUCRS, Porto Alegre, Brazil. August 2019. (Research Advisor: Ney Laert Vilar Calazans)</p>
+<p>[3] - SARTORI, M. L. L.; WUERDIG, R. N.; MOREIRA, M. T.; CALAZANS, N. L. V. Pulsar: Constraining QDI Circuits Cycle Time Using Traditional EDA Tools. In: 25th IEEE International Symposium on Asynchronous Circuits and Systems (ASYNC'19), Hirosaki, 2019. pp. 114-123. (Best Paper Award Nominee)</p>
+<p>[4] - MOREIRA, M. T.; BEEREL, P. A.; SARTORI, M. L. L.; CALAZANS, N. L. V. NCL Synthesis with Conventional EDA Tools: Technology Mapping and Optimization. IEEE Transactions on Circuits and Systems I - Regular Papers, 65(6), June 2018, pp. 1981-1993.</p>
+<p>[5] - MOREIRA, Matheus Trevisan. Asynchronous Circuits: Innovations in Components, Cell Libraries and Design Templates. PhD Thesis, PPGCC - FACIN - PUCRS, Porto Alegre, Brazil. January 2016. 276p. Scholarship Sponsor: CNPq (PNM). (Presented and  Approved. Research Advisor: Ney Laert Vilar Calazans, Co-Advisor: Peter Beerel, University of Southern California).</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/marlls1989/pulsar">Pulsar</a> is maintained by <a href="https://github.com/marlls1989">marlls1989</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
