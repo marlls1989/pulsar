@@ -45,7 +45,7 @@ The computation of these constraints are covered in references [2] and [3].
 
 <figure class="image">
   <figcaption>Figure 1. Pulsar flow overview, green components are part of the flow front-end and red components are part of the flow back-end.</figcaption>
-  <img src="./doc/drflow.svg" alt="Pulsar flow overview."/>
+  <img src="./docs/drflow.svg" alt="Pulsar flow overview."/>
 </figure>
 
 The Sequential SDDS-NCL Synthesis Flow, depicted in Figure 2, is at the core of the Pulsar back-end.
@@ -61,7 +61,7 @@ For more information on SDDS-NCL and the Fix X-Netlist algorithm see references 
 
 <figure class="image">
   <figcaption>Figure 2. The Sequential SDDS-NCL Synthesis Flow.</figcaption>
-  <img src="./doc/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
+  <img src="./docs/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
 </figure>
 
 ## Repository Structure
