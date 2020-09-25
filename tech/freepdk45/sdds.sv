@@ -122,7 +122,7 @@ module tiehi
 
    RNCL2W11OF2X4 t (.A(ack_in), .B(ack_in), .Q(y_t), .RN(reset), .G(ck));
    assign y.f = 1'b0;
-   assign y.f = y_t;
+   assign y.t = y_t;
    assign ack_in = ~(y.ack);
 
 endmodule // tiehi
