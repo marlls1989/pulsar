@@ -73,6 +73,9 @@ This repository is organised in the following structure, each subfolder contains
 - /scripts : contains the genus TCL scripts.
 - /tech : contains the target technology dependent files and the virtual-netlist library of components.
 
+## ACKNOWLEDGEMENTS
+The development of the Pulsar environment was enabled through the use of several professional tools. These were obtained through agreements in the scope of cooperation projects as well as engagement in Institutional University Programs. In these contexts we acknowledge the support of Silvaco Inc., Cadence Inc., Synopsys Inc. and Mentor Graphics (Siemens).
+
 ## REFERENCES
 [1] - SARTORI, M. L. L.; MOREIRA, M. T.; CALAZANS, N. L. V. A Frontend using Traditional EDA Tools for the Pulsar QDI Design Flow. In: 26th IEEE International Symposium on Asynchronous Circuits and Systems (ASYNC'20), 2020. To be presented.
 
