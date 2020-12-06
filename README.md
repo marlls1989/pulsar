@@ -1,4 +1,4 @@
-# Pulsar - A Flow to Support the Design of QDI asynchronous Circuits
+# Pulsar - A Flow to Support the Design of QDI Asynchronous Circuits
 
 This repository contains the public release of Pulsar, a timing-constrainable asynchronous circuit synthesis framework.
 Pulsar is under development. 
