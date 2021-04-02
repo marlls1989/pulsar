@@ -63,8 +63,8 @@ For more information on SDDS-NCL and the Fix X-Netlist algorithm see references 
 
 <figure class="image">
     <div align="center">
-      <figcaption>Figure 2. The Sequential SDDS-NCL Synthesis Flow.</figcaption>
-      <img src="./docs/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
+        <figcaption>Figure 2. The Sequential SDDS-NCL Synthesis Flow.</figcaption>
+        <img src="./docs/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
     </div>
 </figure>
 
