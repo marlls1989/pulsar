@@ -62,8 +62,10 @@ This is usually an automatic procedure hidden from the user.
 For more information on SDDS-NCL and the Fix X-Netlist algorithm see references [4] and [5]. For the Sequential SDDS-NCL see references [2] and [3].
 
 <figure class="image">
-  <figcaption>Figure 2. The Sequential SDDS-NCL Synthesis Flow.</figcaption>
-  <img src="./docs/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
+    <div align="center">
+      <figcaption>Figure 2. The Sequential SDDS-NCL Synthesis Flow.</figcaption>
+      <img src="./docs/SSDDS-Flow.svg" alt="Sequential SDDS-NCL Synthesis."/>
+    </div>
 </figure>
 
 ## Repository Structure
