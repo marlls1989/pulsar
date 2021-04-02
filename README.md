@@ -43,12 +43,12 @@ This back-end comprises the Half Buffer Channel Network (HBCN) Constrainer and t
 The HBCN Constrainer computes the HBCN model from the structural Circuit Graph and derives the design constrains to use during synthesis to constrain the cycle time.
 The computation of these constraints are covered in references [2] and [3].
 
-<p align="center">
 <figure class="image">
+    <div align="center">
       <figcaption>Figure 1. Pulsar flow overview, green components are part of the flow front-end and red components are part of the flow back-end.</figcaption>
       <img src="./docs/drflow.svg" alt="Pulsar flow overview."/>
+    </div>
 </figure>
-</p>
 
 The Sequential SDDS-NCL Synthesis Flow, depicted in Figure 2, is at the core of the Pulsar back-end.
 It reads the Virtual Netlist and the Virtual Function Dual-Rail Expansions of components, a library of models.
