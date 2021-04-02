@@ -44,8 +44,10 @@ The HBCN Constrainer computes the HBCN model from the structural Circuit Graph a
 The computation of these constraints are covered in references [2] and [3].
 
 <figure class="image">
-  <figcaption>Figure 1. Pulsar flow overview, green components are part of the flow front-end and red components are part of the flow back-end.</figcaption>
-  <img src="./docs/drflow.svg" alt="Pulsar flow overview."/>
+  <p align="center"> 
+      <figcaption>Figure 1. Pulsar flow overview, green components are part of the flow front-end and red components are part of the flow back-end.</figcaption>
+      <img src="./docs/drflow.svg" alt="Pulsar flow overview."/>
+  </p>
 </figure>
 
 The Sequential SDDS-NCL Synthesis Flow, depicted in Figure 2, is at the core of the Pulsar back-end.
