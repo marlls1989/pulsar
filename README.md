@@ -46,6 +46,7 @@ The computation of these constraints are covered in references [2] and [3].
 <figure class="image">
     <div align="center">
       <figcaption>Figure 1. Pulsar flow overview, green components are part of the flow front-end and red components are part of the flow back-end.</figcaption>
+      <p></p>
       <img src="./docs/drflow.svg" alt="Pulsar flow overview."/>
     </div>
 </figure>
